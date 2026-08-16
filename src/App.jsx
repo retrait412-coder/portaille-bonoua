@@ -22,9 +22,9 @@ export default function App() {
   };
   
   return (
-    <div className="min-h-screen bg-white flex flex-col font-sans text-slate-900 selection:bg-slate-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50/30 flex flex-col font-sans text-slate-900 selection:bg-slate-900 selection:text-white overflow-x-hidden">
       
-      {/* 1. NAVBAR - Style Minimaliste */}
+      {/* 1. NAVBAR - Style Minimaliste fixée en haut */}
       <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
@@ -48,7 +48,7 @@ export default function App() {
               <button onClick={() => scrollToForm('track')} className="text-sm font-bold text-slate-700 hover:text-slate-900 transition">
                 Mon Dossier
               </button>
-              <button onClick={() => scrollToForm('enroll')} className="bg-slate-900 text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-slate-800 transition-all">
+              <button onClick={() => scrollToForm('enroll')} className="bg-slate-900 text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-slate-800 transition-all shadow-md shadow-slate-900/10">
                 Espace Étudiant
               </button>
             </div>
@@ -56,7 +56,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION - Design Split Responsive */}
+      {/* 2. HERO SECTION - Design Split */}
       <div className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -78,50 +78,55 @@ export default function App() {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => scrollToForm('enroll')} className="flex justify-center items-center px-8 py-3.5 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all">
+                <button onClick={() => scrollToForm('enroll')} className="flex justify-center items-center px-8 py-3.5 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-slate-900/20">
                   Commencer mon inscription <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
-                <button onClick={() => scrollToForm('track')} className="flex justify-center items-center px-8 py-3.5 bg-white text-slate-900 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition-all">
+                <button onClick={() => scrollToForm('track')} className="flex justify-center items-center px-8 py-3.5 bg-white text-slate-900 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition-all shadow-sm">
                   Accéder à mon espace
                 </button>
               </div>
             </motion.div>
 
-            {/* Colonne Droite : Composition d'images avec extérieur et intérieur */}
+            {/* Colonne Droite : Composition d'images chevauchées (Visible partout) */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full mt-10 lg:mt-0">
-              {/* Image Principale (Haut Droite) : Extérieur / Élèves */}
-              <div className="absolute top-0 right-0 w-[80%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl">
-                <img src="/hero-students.jpg" alt="Élèves" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+              
+              {/* Image Principale (Haut Droite) : Mur extérieur */}
+              <div className="absolute top-0 right-0 w-[75%] h-[70%] rounded-[2rem] overflow-hidden shadow-2xl">
+                <img src="/hero-students.jpg" alt="Lycée Moderne de Bonoua Extérieur" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
               </div>
               
-              <div className="absolute top-[65%] left-[10%] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl z-20 border border-slate-100">
-                <CheckCircle className="w-8 h-8 text-amber-500" />
+              {/* Badge validé flottant (Orange) */}
+              <div className="absolute top-[55%] left-[15%] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl z-20 border border-slate-100">
+                <div className="w-12 h-12 rounded-full border-2 border-amber-100 flex items-center justify-center">
+                  <CheckCircle className="w-6 h-6 text-amber-500" />
+                </div>
               </div>
               
-              {/* Image Secondaire (Bas Gauche) : Intérieur */}
-              <div className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-[2rem] border-[8px] border-white overflow-hidden shadow-xl z-10 bg-slate-100">
-                 <img src="/interior-students.jpg" alt="Intérieur de classe" className="w-full h-full object-cover object-center" onError={(e) => e.target.style.display = 'none'} />
+              {/* Image Secondaire (Bas Gauche) : Intérieur/Élèves */}
+              <div className="absolute bottom-0 left-0 w-[60%] h-[55%] rounded-[2rem] border-[8px] border-slate-50/50 overflow-hidden shadow-2xl z-10 bg-white">
+                 <img src="/interior-students.jpg" alt="Intérieur Lycée" className="w-full h-full object-cover object-center" onError={(e) => e.target.style.display = 'none'} />
               </div>
+              
             </motion.div>
           </div>
         </div>
       </div>
 
       {/* 3. ACCÈS RAPIDES */}
-      <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50/50 rounded-3xl mb-12">
+      <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 mb-8">
         <h2 className="text-2xl font-black text-center text-slate-900 mb-10">Accès Rapides</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <FeatureCard icon={<UserPlus />} title="Inscription 2024" desc="Démarrez ou finalisez votre processus d'inscription administrative." linkText="Démarrer" onClick={() => scrollToForm('enroll')} />
-          <FeatureCard icon={<Users />} title="Ma Classe" desc="Consultez la liste de vos professeurs et camarades." linkText="Consulter" onClick={() => scrollToForm('track')} />
-          <FeatureCard icon={<Calendar />} title="Emploi du temps" desc="Visualisez votre planning hebdomadaire en temps réel." linkText="Voir l'agenda" onClick={() => scrollToForm('track')} />
-          <FeatureCard icon={<BookOpen />} title="Résultats" desc="Consultez vos bulletins et notes de l'année en cours." linkText="Accéder" onClick={() => scrollToForm('track')} />
+          <FeatureCard icon={<UserPlus className="w-5 h-5"/>} title="Inscription 2024" desc="Démarrez ou finalisez votre processus d'inscription administrative." linkText="Démarrer" onClick={() => scrollToForm('enroll')} />
+          <FeatureCard icon={<Users className="w-5 h-5"/>} title="Ma Classe" desc="Consultez la liste de vos professeurs et camarades." linkText="Consulter" onClick={() => scrollToForm('track')} />
+          <FeatureCard icon={<Calendar className="w-5 h-5"/>} title="Emploi du temps" desc="Visualisez votre planning hebdomadaire en temps réel." linkText="Voir l'agenda" onClick={() => scrollToForm('track')} />
+          <FeatureCard icon={<BookOpen className="w-5 h-5"/>} title="Résultats" desc="Consultez vos bulletins et notes de l'année en cours." linkText="Accéder" onClick={() => scrollToForm('track')} />
         </div>
       </div>
 
       {/* 4. ZONE DE FORMULAIRES */}
-      <main ref={formRef} className="flex-grow flex flex-col items-center px-4 py-12 max-w-5xl mx-auto w-full relative z-10">
+      <main ref={formRef} className="flex-grow flex flex-col items-center px-4 py-8 max-w-5xl mx-auto w-full relative z-10">
         
-        <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 w-full overflow-hidden">
+        <div className="bg-white rounded-[2rem] shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 w-full overflow-hidden">
           <div className="flex border-b border-slate-100 bg-slate-50 p-2 gap-2">
             <button
               onClick={() => setActiveTab('enroll')}
@@ -160,27 +165,14 @@ export default function App() {
           </div>
         </div>
         
-        <div className="mt-8 flex items-center justify-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 py-2 px-4 rounded-full">
-          <ShieldCheck className="w-4 h-4" />
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 py-2.5 px-5 rounded-full border border-slate-200">
+          <ShieldCheck className="w-4 h-4 text-slate-400" />
           <span>Espace numérique sécurisé et conforme aux standards de protection des données.</span>
         </div>
       </main>
 
-      {/* BANDEAU INSTITUTIONNEL UNIQUE (Ministère) */}
-      <div className="w-full bg-slate-50 py-8 mt-12 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 flex justify-center items-center">
-          <img 
-            src="/logo-ministere.png" 
-            alt="Ministère de l'Éducation Nationale" 
-            className="h-16 md:h-20 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
-            title="Ministère de l'Éducation Nationale"
-            onError={(e) => e.target.style.display = 'none'} 
-          />
-        </div>
-      </div>
-
       {/* 5. FOOTER */}
-      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-8">
+      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-8 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
           <h2 className="text-2xl font-black mb-8">Lycée Moderne de Bonoua</h2>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-300 font-medium mb-12">
@@ -201,11 +193,11 @@ export default function App() {
 
 function FeatureCard({ icon, title, desc, linkText, onClick }) {
   return (
-    <div onClick={onClick} className="cursor-pointer bg-white rounded-2xl p-6 border border-slate-100 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col items-start text-left group">
-      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4 text-slate-600 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+    <div onClick={onClick} className="cursor-pointer bg-white rounded-3xl p-8 border border-slate-100 shadow-sm hover:shadow-xl hover:border-blue-100 transition-all duration-300 flex flex-col items-start text-left group">
+      <div className="bg-slate-50 p-3 rounded-xl border border-slate-100 mb-6 text-slate-500 group-hover:bg-blue-600 group-hover:text-white transition-colors">
         {icon}
       </div>
-      <h4 className="font-bold text-slate-900 text-lg mb-2">{title}</h4>
+      <h4 className="font-bold text-slate-900 text-lg mb-3">{title}</h4>
       <p className="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{desc}</p>
       <span className="text-blue-600 font-semibold text-sm flex items-center group-hover:translate-x-1 transition-transform">
         {linkText} <ArrowRight className="w-4 h-4 ml-1" />
@@ -275,7 +267,7 @@ function EnrollmentForm({ onSuccess }) {
       
       <div className="flex flex-col gap-2">
         <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Classe souhaitée</label>
-        <select name="formation" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-700 font-medium focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none">
+        <select name="formation" required className="w-full bg-slate-50/50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-700 font-medium focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none">
           <option value="">Sélectionnez le niveau...</option>
           <option value="6ème">6ème</option>
           <option value="5ème">5ème</option>
@@ -295,7 +287,7 @@ function EnrollmentForm({ onSuccess }) {
 
       <div className="mt-4">
         <div className="relative group">
-          <div className="relative bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-100 transition-colors min-h-[140px]">
+          <div className="relative bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-8 flex flex-col items-center justify-center text-center hover:bg-slate-100 transition-colors min-h-[140px]">
             <input type="file" id="document" accept=".pdf,.jpg,.png" onChange={(e) => setFile(e.target.files[0])} className="hidden" required={!file} />
             
             {file ? (
@@ -327,7 +319,7 @@ function EnrollmentForm({ onSuccess }) {
               </div>
             ) : (
               <label htmlFor="document" className="cursor-pointer flex flex-col items-center justify-center w-full h-full absolute inset-0">
-                <Upload className="w-8 h-8 text-slate-400 mb-3" />
+                <Upload className="w-6 h-6 text-slate-400 mb-3" />
                 <span className="text-slate-800 font-bold text-sm mb-1">Joindre la fiche d'inscription</span>
                 <span className="text-slate-400 font-medium text-xs">PDF, JPG ou PNG (Max 5Mo)</span>
               </label>
@@ -343,7 +335,7 @@ function EnrollmentForm({ onSuccess }) {
         </motion.div>
       )}
 
-      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:-translate-y-0.5 transition-all disabled:opacity-70 flex justify-center items-center mt-4">
+      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:-translate-y-0.5 transition-all disabled:opacity-70 flex justify-center items-center mt-6">
         {loading ? "Traitement..." : "Valider et passer au paiement"}
       </button>
     </motion.form>
@@ -489,7 +481,7 @@ function TrackingForm() {
            {error}
         </div>
       )}
-      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-slate-800 transition-all duration-300 disabled:opacity-70 mt-2">
+      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-slate-800 transition-all duration-300 disabled:opacity-70 mt-4">
         {loading ? "Recherche..." : "Consulter mon dossier"}
       </button>
     </motion.form>
@@ -504,7 +496,7 @@ function InputGroup({ label, name, type = "text", placeholder, className = "", i
         {icon && <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">{icon}</div>}
         <input 
           type={type} name={name} required placeholder={placeholder}
-          className={`w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 text-slate-900 font-medium placeholder-slate-400 focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none ${icon ? 'pl-11 pr-4' : 'px-4'}`} 
+          className={`w-full bg-slate-50/50 border border-slate-200 rounded-xl py-3.5 text-slate-900 font-medium placeholder-slate-400 focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none ${icon ? 'pl-11 pr-4' : 'px-4'}`} 
         />
       </div>
     </div>
