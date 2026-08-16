@@ -71,11 +71,16 @@ export default function App() {
       {/* 2. HERO */}
       <div className="relative bg-white border-b border-slate-100 overflow-hidden">
         
-        {/* BLOC IMAGE CORRIGÉ (Visible sur Mobile à 30% et PC à 100%) */}
-        <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-auto w-full lg:w-[60%] z-0 opacity-30 lg:opacity-100">
-           <img src="/hero-students.jpg" alt="Lycée Moderne de Bonoua" className="w-full h-full object-cover object-center lg:object-top" onError={(e) => e.target.style.display = 'none'} />
-           <div className="absolute inset-y-0 left-0 w-full lg:w-[40%] bg-gradient-to-r from-white/80 lg:from-white to-transparent pointer-events-none"></div>
-           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+        {/* BLOC IMAGE AÉRÉ (Moins étouffé, plus visible sur Mobile et PC) */}
+        <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-auto w-full lg:w-[75%] z-0 opacity-40 lg:opacity-100">
+           <img 
+             src="/hero-students.jpg" 
+             alt="Lycée Moderne de Bonoua" 
+             className="w-full h-full object-cover object-center lg:object-left" 
+             onError={(e) => e.target.style.display = 'none'} 
+           />
+           <div className="absolute inset-y-0 left-0 w-full lg:w-[45%] bg-gradient-to-r from-white via-white/60 to-transparent pointer-events-none"></div>
+           <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-32">
