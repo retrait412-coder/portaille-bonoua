@@ -56,7 +56,7 @@ export default function App() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION - Design Split */}
+      {/* 2. HERO SECTION - Design Split Responsive */}
       <div className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -87,8 +87,8 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Colonne Droite : Composition d'images */}
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[400px] lg:h-[500px] w-full hidden md:block">
+            {/* Colonne Droite : Composition d'images (Maintenant VISIBLE sur mobile avec mt-10 et h-300px) */}
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full mt-10 lg:mt-0">
               <div className="absolute top-0 right-0 w-[80%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl">
                 <img src="/hero-students.jpg" alt="Élèves" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
               </div>
