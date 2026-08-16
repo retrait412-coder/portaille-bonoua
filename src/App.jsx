@@ -71,40 +71,46 @@ export default function App() {
       {/* 2. HERO */}
       <div className="relative bg-white border-b border-slate-100 overflow-hidden">
         
-        {/* BLOC IMAGE AÉRÉ (Moins étouffé, plus visible sur Mobile et PC) */}
-        <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-auto w-full lg:w-[75%] z-0 opacity-40 lg:opacity-100">
+        {/* BLOC IMAGE AVEC OPACITÉ ADAPTÉE */}
+        <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-auto w-full lg:w-[75%] z-0 opacity-50 lg:opacity-100">
            <img 
              src="/hero-students.jpg" 
              alt="Lycée Moderne de Bonoua" 
              className="w-full h-full object-cover object-center lg:object-left" 
              onError={(e) => e.target.style.display = 'none'} 
            />
-           <div className="absolute inset-y-0 left-0 w-full lg:w-[45%] bg-gradient-to-r from-white via-white/60 to-transparent pointer-events-none"></div>
-           <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
+           {/* Dégradés pour lisser la transition avec le texte */}
+           <div className="absolute inset-y-0 left-0 w-full lg:w-[45%] bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none"></div>
+           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"></div>
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-32">
           <div className="max-w-2xl">
             <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/50 border border-indigo-100 mb-6">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/90 backdrop-blur-sm border border-indigo-100 mb-6 shadow-sm">
                 <Award className="w-4 h-4 text-indigo-600" />
                 <span className="text-xs font-bold text-indigo-900 tracking-wider uppercase">Rentrée 2026-2027</span>
               </div>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase leading-[1.1] mb-6 tracking-tight">
+              
+              {/* TITRE BLINDÉ : Drop shadow blanc imposant un contraste maximal face à l'image */}
+              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase leading-[1.1] mb-6 tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.9)]">
                 Inscrivez-vous <br/>
                 au lycée en toute <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-amber-500">
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-amber-500 drop-shadow-none">
                   simplicité
                 </span>
               </h1>
-              <p className="text-lg text-slate-600 font-medium leading-relaxed mb-8 max-w-lg bg-white/40 backdrop-blur-sm rounded-lg p-2 -ml-2">
+              
+              {/* TEXTE BLINDÉ : Fond blanc semi-transparent et flouté (backdrop-blur) pour l'isoler de l'image */}
+              <p className="text-lg text-slate-800 font-semibold leading-relaxed mb-8 max-w-lg bg-white/70 backdrop-blur-md rounded-xl p-4 shadow-sm border border-white/50">
                 Inscrivez-vous en ligne, consultez votre classe et accédez à votre emploi du temps en quelques clics, via une plateforme ultra-sécurisée.
               </p>
+              
               <div className="flex flex-col sm:flex-row gap-4">
                 <button onClick={() => scrollToForm('enroll')} className="flex justify-center items-center px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 hover:bg-indigo-700 transition-all">
                   S'inscrire maintenant <ArrowRight className="ml-2 w-5 h-5" />
                 </button>
-                <button onClick={scrollToFeatures} className="flex justify-center items-center px-8 py-4 bg-white/90 backdrop-blur-md text-slate-700 font-bold border border-slate-200 rounded-xl hover:bg-slate-50 transition-all">
+                <button onClick={scrollToFeatures} className="flex justify-center items-center px-8 py-4 bg-white/90 backdrop-blur-md text-slate-700 font-bold border border-slate-200 rounded-xl hover:bg-slate-50 transition-all shadow-sm">
                   Comment ça marche ? <PlayCircle className="ml-2 w-5 h-5 text-indigo-600" />
                 </button>
               </div>
