@@ -87,17 +87,24 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Colonne Droite : Composition d'images (Maintenant VISIBLE sur mobile avec mt-10 et h-300px) */}
+            {/* Colonne Droite : Composition d'images avec Extérieur et Intérieur */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[300px] sm:h-[400px] lg:h-[500px] w-full mt-10 lg:mt-0">
+              
+              {/* Image Principale (Haut Droite) : Les élèves / L'extérieur */}
               <div className="absolute top-0 right-0 w-[80%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl">
-                <img src="/hero-students.jpg" alt="Élèves" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                <img src="/hero-students.jpg" alt="Élèves sur le campus" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
               </div>
+              
+              {/* Badge flottant */}
               <div className="absolute top-[65%] left-[10%] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl z-20 border border-slate-100">
                 <CheckCircle className="w-8 h-8 text-amber-500" />
               </div>
+              
+              {/* Image Secondaire (Bas Gauche) : L'intérieur de la classe */}
               <div className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-[2rem] border-[8px] border-white overflow-hidden shadow-xl z-10 bg-slate-100">
-                 <img src="/hero-students.jpg" alt="Façade" className="w-full h-full object-cover object-bottom" onError={(e) => e.target.style.display = 'none'} />
+                 <img src="/interior-students.jpg" alt="Intérieur des classes" className="w-full h-full object-cover object-center" onError={(e) => e.target.style.display = 'none'} />
               </div>
+              
             </motion.div>
           </div>
         </div>
@@ -162,8 +169,35 @@ export default function App() {
         </div>
       </main>
 
+      {/* NOUVEAU : BANDEAU INSTITUTIONNEL (Ministère, Emblème, DRENA) */}
+      <div className="w-full bg-slate-50 py-10 mt-12 border-t border-slate-200">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row justify-center items-center gap-10 md:gap-20">
+          <img 
+            src="/embleme-ci.png" 
+            alt="République de Côte d'Ivoire" 
+            className="h-16 md:h-20 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            title="République de Côte d'Ivoire"
+            onError={(e) => e.target.style.display = 'none'} 
+          />
+          <img 
+            src="/logo-ministere.png" 
+            alt="Ministère de l'Éducation Nationale" 
+            className="h-16 md:h-20 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            title="Ministère de l'Éducation Nationale et de l'Alphabétisation"
+            onError={(e) => e.target.style.display = 'none'} 
+          />
+          <img 
+            src="/logo-drena.png" 
+            alt="DRENA Grand-Bassam" 
+            className="h-16 md:h-20 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            title="DRENA de Grand-Bassam"
+            onError={(e) => e.target.style.display = 'none'} 
+          />
+        </div>
+      </div>
+
       {/* 5. FOOTER */}
-      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-8 mt-12">
+      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
           <h2 className="text-2xl font-black mb-8">Lycée Moderne de Bonoua</h2>
           <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-300 font-medium mb-12">
