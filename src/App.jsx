@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Upload, Search, CheckCircle, ArrowRight, 
-  Fingerprint, Award, FileText, Calendar,
-  UserPlus, Users, PlayCircle, MapPin, Phone, Mail, AlertCircle,
-  GraduationCap, Smartphone, ShieldCheck, CreditCard, X
+  Fingerprint, FileText, Calendar,
+  UserPlus, Users, MapPin, Phone, Mail, AlertCircle,
+  Smartphone, ShieldCheck, CreditCard, X, BookOpen
 } from 'lucide-react';
 import axios from 'axios';
 
@@ -20,173 +20,134 @@ export default function App() {
     setActiveTab(tab);
     formRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
-
-  const scrollToFeatures = () => {
-    featuresRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  };
   
   return (
-    <div className="min-h-screen bg-[#F8FAFC] flex flex-col font-sans text-slate-800 selection:bg-indigo-900 selection:text-white overflow-x-hidden">
+    <div className="min-h-screen bg-white flex flex-col font-sans text-slate-900 selection:bg-slate-900 selection:text-white overflow-x-hidden">
       
-      {/* 1. NAVBAR */}
-      <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-white/80 backdrop-blur-md border-b border-slate-200/50">
+      {/* 1. NAVBAR - Style Minimaliste */}
+      <nav className="fixed w-full z-50 top-0 transition-all duration-300 bg-white/90 backdrop-blur-md border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center gap-3 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-              <div className="relative">
-                <div className="absolute inset-0 bg-indigo-900 blur-lg opacity-20"></div>
-                <img src="/logo.png" alt="Logo" className="h-12 w-12 object-contain relative z-10" onError={(e) => e.target.style.display = 'none'} />
-              </div>
+              <img src="/logo.png" alt="Logo" className="h-10 w-10 object-contain" onError={(e) => e.target.style.display = 'none'} />
               <div className="flex flex-col">
-                <span className="font-black text-xl text-slate-900 tracking-tight leading-none uppercase">
-                  Lycée Moderne<br/>de Bonoua
-                </span>
-                <span className="text-[9px] font-bold text-amber-600 tracking-[0.1em] uppercase mt-1">
-                  Excellence • Discipline • Réussite
+                <span className="font-bold text-lg text-slate-900 tracking-tight leading-none">
+                  Lycée Moderne <br/> de Bonoua
                 </span>
               </div>
             </div>
 
-            <div className="hidden lg:flex items-center space-x-8 font-bold text-slate-500 text-sm">
-              <button onClick={() => window.scrollTo(0,0)} className="text-indigo-700 border-b-2 border-indigo-700 pb-1">Accueil</button>
-              <button onClick={() => scrollToForm('enroll')} className="hover:text-indigo-700 transition">Inscription</button>
-              <button onClick={() => scrollToForm('track')} className="hover:text-indigo-700 transition">Emplois du temps</button>
-              <a href="#contact" className="hover:text-indigo-700 transition">Contact</a>
+            <div className="hidden lg:flex items-center space-x-8 font-semibold text-slate-500 text-sm">
+              <button onClick={() => window.scrollTo(0,0)} className="text-slate-900 border-b-2 border-slate-900 pb-1">Accueil</button>
+              <button onClick={() => scrollToForm('enroll')} className="hover:text-slate-900 transition">Inscription</button>
+              <button onClick={() => scrollToForm('track')} className="hover:text-slate-900 transition">Informations</button>
+              <a href="#contact" className="hover:text-slate-900 transition">Contact</a>
             </div>
 
             <div className="hidden md:flex items-center space-x-4">
-              <button onClick={() => scrollToForm('track')} className="flex items-center px-5 py-2.5 text-slate-700 font-bold border border-slate-200 rounded-xl hover:bg-slate-50 transition">
-                <Search className="w-4 h-4 mr-2 text-indigo-600" />
+              <button onClick={() => scrollToForm('track')} className="text-sm font-bold text-slate-700 hover:text-slate-900 transition">
                 Mon Dossier
               </button>
-              <button onClick={() => scrollToForm('enroll')} className="flex items-center px-5 py-2.5 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 hover:bg-indigo-700 hover:scale-105 transition-all">
-                <UserPlus className="w-4 h-4 mr-2" />
-                S'inscrire
+              <button onClick={() => scrollToForm('enroll')} className="bg-slate-900 text-white text-sm font-bold px-6 py-2.5 rounded-lg hover:bg-slate-800 transition-all">
+                Espace Étudiant
               </button>
             </div>
           </div>
         </div>
       </nav>
 
-      {/* 2. HERO */}
-      <div className="relative bg-white border-b border-slate-100 overflow-hidden">
-        
-        {/* BLOC IMAGE AVEC OPACITÉ ADAPTÉE */}
-        <div className="absolute inset-0 lg:inset-y-0 lg:right-0 lg:left-auto w-full lg:w-[75%] z-0 opacity-50 lg:opacity-100">
-           <img 
-             src="/hero-students.jpg" 
-             alt="Lycée Moderne de Bonoua" 
-             className="w-full h-full object-cover object-center lg:object-left" 
-             onError={(e) => e.target.style.display = 'none'} 
-           />
-           {/* Dégradés pour lisser la transition avec le texte */}
-           <div className="absolute inset-y-0 left-0 w-full lg:w-[45%] bg-gradient-to-r from-white via-white/80 to-transparent pointer-events-none"></div>
-           <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none"></div>
-        </div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-28 pb-16 lg:pt-36 lg:pb-32">
-          <div className="max-w-2xl">
-            <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.6 }}>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50/90 backdrop-blur-sm border border-indigo-100 mb-6 shadow-sm">
-                <Award className="w-4 h-4 text-indigo-600" />
-                <span className="text-xs font-bold text-indigo-900 tracking-wider uppercase">Rentrée 2026-2027</span>
+      {/* 2. HERO SECTION - Design Split */}
+      <div className="relative pt-32 pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            {/* Colonne Gauche : Texte */}
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl">
+              <div className="inline-flex items-center gap-2 mb-6">
+                <span className="w-8 h-[2px] bg-amber-500"></span>
+                <span className="text-xs font-bold text-amber-600 tracking-widest uppercase">Portail officiel du lycée</span>
               </div>
               
-              {/* TITRE BLINDÉ : Drop shadow blanc imposant un contraste maximal face à l'image */}
-              <h1 className="text-4xl sm:text-5xl md:text-6xl font-black text-slate-900 uppercase leading-[1.1] mb-6 tracking-tight drop-shadow-[0_4px_15px_rgba(255,255,255,0.9)]">
-                Inscrivez-vous <br/>
-                au lycée en toute <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-amber-500 drop-shadow-none">
-                  simplicité
-                </span>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-[1.1] mb-6 tracking-tight">
+                Votre parcours scolaire, <br/>
+                <span className="text-blue-600">simplement.</span>
               </h1>
               
-              {/* TEXTE BLINDÉ : Fond blanc semi-transparent et flouté (backdrop-blur) pour l'isoler de l'image */}
-              <p className="text-lg text-slate-800 font-semibold leading-relaxed mb-8 max-w-lg bg-white/70 backdrop-blur-md rounded-xl p-4 shadow-sm border border-white/50">
-                Inscrivez-vous en ligne, consultez votre classe et accédez à votre emploi du temps en quelques clics, via une plateforme ultra-sécurisée.
+              <p className="text-lg text-slate-600 mb-8 leading-relaxed">
+                Une interface pensée pour la clarté et l'efficacité. Accédez à vos outils, suivez votre scolarité et restez connecté avec l'administration du Lycée Moderne de Bonoua, dans un environnement numérique sécurisé.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <button onClick={() => scrollToForm('enroll')} className="flex justify-center items-center px-8 py-4 bg-indigo-600 text-white font-bold rounded-xl shadow-lg shadow-indigo-600/30 hover:bg-indigo-700 transition-all">
-                  S'inscrire maintenant <ArrowRight className="ml-2 w-5 h-5" />
+                <button onClick={() => scrollToForm('enroll')} className="flex justify-center items-center px-8 py-3.5 bg-slate-900 text-white font-bold rounded-xl hover:bg-slate-800 transition-all">
+                  Commencer mon inscription <ArrowRight className="ml-2 w-4 h-4" />
                 </button>
-                <button onClick={scrollToFeatures} className="flex justify-center items-center px-8 py-4 bg-white/90 backdrop-blur-md text-slate-700 font-bold border border-slate-200 rounded-xl hover:bg-slate-50 transition-all shadow-sm">
-                  Comment ça marche ? <PlayCircle className="ml-2 w-5 h-5 text-indigo-600" />
+                <button onClick={() => scrollToForm('track')} className="flex justify-center items-center px-8 py-3.5 bg-white text-slate-900 border border-slate-200 font-bold rounded-xl hover:bg-slate-50 transition-all">
+                  Accéder à mon espace
                 </button>
+              </div>
+            </motion.div>
+
+            {/* Colonne Droite : Composition d'images */}
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[400px] lg:h-[500px] w-full hidden md:block">
+              <div className="absolute top-0 right-0 w-[80%] h-[75%] rounded-[2rem] overflow-hidden shadow-2xl">
+                <img src="/hero-students.jpg" alt="Élèves" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+              </div>
+              <div className="absolute top-[65%] left-[10%] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl z-20 border border-slate-100">
+                <CheckCircle className="w-8 h-8 text-amber-500" />
+              </div>
+              <div className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-[2rem] border-[8px] border-white overflow-hidden shadow-xl z-10 bg-slate-100">
+                 <img src="/hero-students.jpg" alt="Façade" className="w-full h-full object-cover object-bottom" onError={(e) => e.target.style.display = 'none'} />
               </div>
             </motion.div>
           </div>
         </div>
       </div>
 
-      {/* 3. CARTES DE FONCTIONNALITÉS */}
-      <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 -mt-10 relative z-20 hidden lg:block">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <FeatureCard icon={<UserPlus />} title="Inscription en ligne" desc="Remplissez le formulaire et soumettez vos pièces justificatives." color="text-indigo-600 bg-indigo-50" onClick={() => scrollToForm('enroll')} />
-          <FeatureCard icon={<Users />} title="Affectation en classe" desc="Consultez votre classe et votre numéro d'identifiant." color="text-emerald-600 bg-emerald-50" onClick={() => scrollToForm('track')} />
-          <FeatureCard icon={<Calendar />} title="Emploi du temps" desc="Accédez à votre emploi du temps hebdomadaire mis à jour." color="text-purple-600 bg-purple-50" onClick={() => scrollToForm('track')} />
-          <FeatureCard icon={<FileText />} title="Résultats & Infos" desc="Consultez vos résultats et restez informé des actualités." color="text-amber-600 bg-amber-50" onClick={() => scrollToForm('track')} />
+      {/* 3. ACCÈS RAPIDES */}
+      <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 bg-slate-50/50 rounded-3xl mb-12">
+        <h2 className="text-2xl font-black text-center text-slate-900 mb-10">Accès Rapides</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <FeatureCard icon={<UserPlus />} title="Inscription 2024" desc="Démarrez ou finalisez votre processus d'inscription administrative." linkText="Démarrer" onClick={() => scrollToForm('enroll')} />
+          <FeatureCard icon={<Users />} title="Ma Classe" desc="Consultez la liste de vos professeurs et camarades." linkText="Consulter" onClick={() => scrollToForm('track')} />
+          <FeatureCard icon={<Calendar />} title="Emploi du temps" desc="Visualisez votre planning hebdomadaire en temps réel." linkText="Voir l'agenda" onClick={() => scrollToForm('track')} />
+          <FeatureCard icon={<BookOpen />} title="Résultats" desc="Consultez vos bulletins et notes de l'année en cours." linkText="Accéder" onClick={() => scrollToForm('track')} />
         </div>
       </div>
 
       {/* 4. ZONE DE FORMULAIRES */}
-      <main ref={formRef} className="flex-grow flex flex-col items-center px-4 py-20 max-w-7xl mx-auto w-full relative z-10">
+      <main ref={formRef} className="flex-grow flex flex-col items-center px-4 py-12 max-w-5xl mx-auto w-full relative z-10">
         
-        <div className="bg-white rounded-[2rem] shadow-xl shadow-slate-200/50 border border-slate-100 w-full overflow-hidden">
-          <div className="flex border-b border-slate-100 bg-slate-50/50 p-2">
+        <div className="bg-white rounded-3xl shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 w-full overflow-hidden">
+          <div className="flex border-b border-slate-100 bg-slate-50 p-2 gap-2">
             <button
               onClick={() => setActiveTab('enroll')}
-              className={`flex-1 py-4 text-center font-bold text-sm rounded-xl transition-all duration-300 ${
-                activeTab === 'enroll' ? 'bg-white text-indigo-900 shadow-sm border border-slate-100' : 'text-slate-400 hover:text-slate-600'
+              className={`flex-1 py-4 text-center font-bold text-sm rounded-2xl transition-all duration-300 ${
+                activeTab === 'enroll' ? 'bg-white text-slate-900 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
               INSCRIPTION & PAIEMENT
             </button>
             <button
               onClick={() => setActiveTab('track')}
-              className={`flex-1 py-4 text-center font-bold text-sm rounded-xl transition-all duration-300 ${
-                activeTab === 'track' ? 'bg-white text-indigo-900 shadow-sm border border-slate-100' : 'text-slate-400 hover:text-slate-600'
+              className={`flex-1 py-4 text-center font-bold text-sm rounded-2xl transition-all duration-300 ${
+                activeTab === 'track' ? 'bg-white text-slate-900 shadow-sm border border-slate-200' : 'text-slate-500 hover:text-slate-700'
               }`}
             >
-              SUIVI & EMPLOI DU TEMPS
+              SUIVI & DOSSIER
             </button>
           </div>
 
           <div className="p-8 md:p-12">
             <AnimatePresence mode="wait">
               {activeTab === 'enroll' ? (
-                <div key="enroll" className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
-                  <div className="lg:col-span-3">
+                <div key="enroll">
                     <EnrollmentFlow />
-                  </div>
-                  
-                  <div className="hidden lg:flex lg:col-span-2 bg-gradient-to-b from-indigo-50 to-slate-50 rounded-3xl p-10 flex-col items-center justify-center text-center h-full border border-indigo-100/50">
-                    <img 
-                      src="/illustration-form.png" 
-                      alt="Illustration Inscription" 
-                      className="w-48 h-auto mb-6 object-contain drop-shadow-xl"
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.nextSibling.style.display = 'flex';
-                      }}
-                    />
-                    <div className="hidden bg-white p-5 rounded-2xl shadow-lg shadow-indigo-100 mb-8 border border-indigo-50">
-                      <Fingerprint className="w-16 h-16 text-indigo-600" />
-                    </div>
-                    
-                    <h3 className="font-black text-slate-900 text-xl mb-3">Plateforme Sécurisée</h3>
-                    <ul className="text-slate-600 text-sm space-y-4 text-left w-full mt-2">
-                      <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 shrink-0"/> Authentification simplifiée.</li>
-                      <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 shrink-0"/> Transaction financière protégée.</li>
-                      <li className="flex items-center gap-3"><CheckCircle className="w-5 h-5 text-emerald-500 shrink-0"/> Données personnelles confidentielles.</li>
-                    </ul>
-                  </div>
                 </div>
               ) : (
-                <div key="track" className="w-full max-w-3xl mx-auto">
+                <div key="track" className="w-full max-w-xl mx-auto">
                   <div className="mb-8 text-center">
-                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Accès Sécurisé Élève</h2>
-                    <p className="text-slate-500 text-sm">Consultez votre classe, téléchargez votre reçu et votre planning.</p>
+                    <h2 className="text-2xl font-bold text-slate-900 mb-2">Accès Sécurisé</h2>
+                    <p className="text-slate-500 text-sm">Consultez votre dossier, téléchargez votre reçu et votre planning.</p>
                   </div>
                   <TrackingForm />
                 </div>
@@ -194,45 +155,26 @@ export default function App() {
             </AnimatePresence>
           </div>
         </div>
+        
+        <div className="mt-8 flex items-center justify-center gap-2 text-xs font-medium text-slate-500 bg-slate-100 py-2 px-4 rounded-full">
+          <ShieldCheck className="w-4 h-4" />
+          <span>Espace numérique sécurisé et conforme aux standards de protection des données.</span>
+        </div>
       </main>
 
       {/* 5. FOOTER */}
-      <footer id="contact" className="bg-slate-900 text-white pt-16 pb-8 border-t-[6px] border-indigo-600 relative overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 bg-indigo-600/10 rounded-full blur-3xl pointer-events-none -mr-48 -mt-48"></div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-12 relative z-10">
-          <div className="col-span-1 md:col-span-1">
-            <h3 className="text-xl font-black mb-4 uppercase tracking-widest text-indigo-400">Lycée Moderne<br/>Bonoua</h3>
-            <p className="text-slate-400 text-sm leading-relaxed">Éducation - Discipline - Réussite. Un établissement d'excellence pour préparer l'élite de demain.</p>
+      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-8 mt-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+          <h2 className="text-2xl font-black mb-8">Lycée Moderne de Bonoua</h2>
+          <div className="flex flex-wrap justify-center gap-6 text-sm text-slate-300 font-medium mb-12">
+            <a href="#" className="hover:text-white transition">Mentions Légales</a>
+            <a href="#" className="hover:text-white transition">Plan du site</a>
+            <a href="#" className="hover:text-white transition">Accessibilité</a>
+            <a href="#" className="hover:text-white transition">Partenaires</a>
+            <a href="#" className="hover:text-white transition">Contact</a>
           </div>
-          <div className="col-span-1 md:col-span-2">
-            <h3 className="text-sm font-bold mb-4 uppercase tracking-widest text-slate-300">Coordonnées Officielles</h3>
-            <div className="space-y-4">
-              <div className="flex items-center gap-4 text-slate-400 text-sm hover:text-white transition-colors">
-                <div className="bg-slate-800 p-2 rounded-lg"><MapPin className="w-4 h-4 text-indigo-400" /></div> 
-                <span>Bonoua, République de Côte d'Ivoire</span>
-              </div>
-              <div className="flex items-center gap-4 text-slate-400 text-sm hover:text-white transition-colors">
-                <div className="bg-slate-800 p-2 rounded-lg"><Phone className="w-4 h-4 text-indigo-400" /></div> 
-                <span>+225 XX XX XX XX XX</span>
-              </div>
-              <div className="flex items-center gap-4 text-slate-400 text-sm hover:text-white transition-colors">
-                <div className="bg-slate-800 p-2 rounded-lg"><Mail className="w-4 h-4 text-indigo-400" /></div> 
-                <span>scolarite@lyceemodernebonoua.ci</span>
-              </div>
-            </div>
-          </div>
-          <div className="col-span-1 flex flex-col md:items-end">
-             <h3 className="text-sm font-bold mb-4 uppercase tracking-widest text-slate-300">Réseau Éducatif</h3>
-             <p className="text-sm text-slate-400 text-left md:text-right leading-relaxed">
-               Ministère de l'Éducation Nationale<br/>
-               et de l'Alphabétisation.
-             </p>
-          </div>
-        </div>
-        <div className="max-w-7xl mx-auto px-4 mt-12 pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
-          <p>© {new Date().getFullYear()} Lycée Moderne de Bonoua. Tous droits réservés.</p>
-          <div className="flex gap-4 mt-4 md:mt-0 font-bold">
-            <span className="flex items-center gap-1"><CheckCircle className="w-3 h-3 text-emerald-500"/> Infrastructure Sécurisée</span>
+          <div className="text-xs text-slate-500 text-center border-t border-slate-700/50 pt-8 w-full max-w-md">
+            © {new Date().getFullYear()} Lycée Moderne de Bonoua. EXCELLENCE • DISCIPLINE • RÉUSSITE
           </div>
         </div>
       </footer>
@@ -240,21 +182,21 @@ export default function App() {
   );
 }
 
-function FeatureCard({ icon, title, desc, color, onClick }) {
+function FeatureCard({ icon, title, desc, linkText, onClick }) {
   return (
-    <div onClick={onClick} className="cursor-pointer bg-white rounded-2xl shadow-lg shadow-slate-200/40 p-6 border border-slate-100 flex items-start gap-5 hover:-translate-y-1 hover:border-indigo-200 transition-all duration-300 group">
-      <div className={`${color} p-4 rounded-xl shrink-0 group-hover:scale-110 transition-transform`}>{icon}</div>
-      <div>
-        <h4 className="font-bold text-slate-900 text-sm mb-2">{title}</h4>
-        <p className="text-xs text-slate-500 leading-relaxed font-medium">{desc}</p>
+    <div onClick={onClick} className="cursor-pointer bg-white rounded-2xl p-6 border border-slate-100 hover:shadow-lg hover:border-slate-200 transition-all duration-300 flex flex-col items-start text-left group">
+      <div className="bg-slate-50 p-3 rounded-lg border border-slate-100 mb-4 text-slate-600 group-hover:bg-slate-900 group-hover:text-white transition-colors">
+        {icon}
       </div>
+      <h4 className="font-bold text-slate-900 text-lg mb-2">{title}</h4>
+      <p className="text-sm text-slate-500 leading-relaxed mb-6 flex-grow">{desc}</p>
+      <span className="text-blue-600 font-semibold text-sm flex items-center group-hover:translate-x-1 transition-transform">
+        {linkText} <ArrowRight className="w-4 h-4 ml-1" />
+      </span>
     </div>
   );
 }
 
-// ==========================================
-// TUNNEL D'INSCRIPTION : FORMULAIRE -> PAIEMENT
-// ==========================================
 function EnrollmentFlow() {
   const [checkoutData, setCheckoutData] = useState(null);
 
@@ -265,9 +207,6 @@ function EnrollmentFlow() {
   return <EnrollmentForm onSuccess={(data) => setCheckoutData(data)} />;
 }
 
-// ==========================================
-// ÉTAPE 1 : FORMULAIRE D'INSCRIPTION (AVEC APERÇU FICHIER)
-// ==========================================
 function EnrollmentForm({ onSuccess }) {
   const [file, setFile] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -299,7 +238,6 @@ function EnrollmentForm({ onSuccess }) {
         }, 1000);
         return;
       }
-      
       const errorMsg = error.response?.data?.message || error.response?.data?.errors?.[0] || "Erreur de connexion au serveur.";
       setMessage({ type: 'error', text: errorMsg });
       setLoading(false);
@@ -307,18 +245,20 @@ function EnrollmentForm({ onSuccess }) {
   };
 
   return (
-    <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="space-y-6">
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">Créez votre dossier</h2>
-        <p className="text-slate-500 text-sm">Étape 1 sur 2 : Informations de l'élève.</p>
+    <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} onSubmit={handleSubmit} className="space-y-6 max-w-2xl mx-auto">
+      <div className="mb-8 text-center">
+        <h2 className="text-2xl font-bold text-slate-900 mb-2">Création de Dossier</h2>
+        <p className="text-slate-500 text-sm">Veuillez renseigner les informations de l'élève.</p>
       </div>
 
-      <InputGroup label="Nom complet de l'élève" name="lastName" placeholder="Saisissez le nom" className="col-span-2" />
-      <InputGroup label="Prénoms de l'élève" name="firstName" placeholder="Saisissez les prénoms" className="col-span-2" />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <InputGroup label="Nom complet" name="lastName" placeholder="Ex: KONE" />
+        <InputGroup label="Prénoms" name="firstName" placeholder="Ex: Moussa" />
+      </div>
       
       <div className="flex flex-col gap-2">
-        <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Classe souhaitée</label>
-        <select name="formation" required className="w-full bg-slate-50 border-none rounded-xl px-4 py-3.5 text-slate-700 font-medium focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all outline-none">
+        <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Classe souhaitée</label>
+        <select name="formation" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3.5 text-slate-700 font-medium focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none">
           <option value="">Sélectionnez le niveau...</option>
           <option value="6ème">6ème</option>
           <option value="5ème">5ème</option>
@@ -336,20 +276,18 @@ function EnrollmentForm({ onSuccess }) {
         <InputGroup label="Téléphone (Clé d'accès)" name="phone" placeholder="Numéro local" type="tel" />
       </div>
 
-      {/* ZONE DE TÉLÉCHARGEMENT AVEC APERÇU VISUEL */}
       <div className="mt-4">
         <div className="relative group">
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-amber-500 rounded-2xl blur opacity-0 group-hover:opacity-10 transition duration-500"></div>
-          <div className="relative bg-white border-2 border-dashed border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-50 transition-colors min-h-[140px]">
+          <div className="relative bg-slate-50 border-2 border-dashed border-slate-200 rounded-2xl p-6 flex flex-col items-center justify-center text-center hover:bg-slate-100 transition-colors min-h-[140px]">
             <input type="file" id="document" accept=".pdf,.jpg,.png" onChange={(e) => setFile(e.target.files[0])} className="hidden" required={!file} />
             
             {file ? (
-              <div className="flex items-center justify-between w-full bg-indigo-50/50 p-4 rounded-xl border border-indigo-100">
+              <div className="flex items-center justify-between w-full bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                 <div className="flex items-center gap-4 overflow-hidden">
                   {file.type.startsWith('image/') ? (
-                    <img src={URL.createObjectURL(file)} alt="Aperçu" className="w-12 h-12 object-cover rounded-lg shadow-sm border border-slate-200" />
+                    <img src={URL.createObjectURL(file)} alt="Aperçu" className="w-12 h-12 object-cover rounded-lg border border-slate-200" />
                   ) : (
-                    <div className="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center shrink-0">
+                    <div className="w-12 h-12 bg-slate-100 text-slate-600 rounded-lg flex items-center justify-center shrink-0">
                       <FileText className="w-6 h-6" />
                     </div>
                   )}
@@ -365,14 +303,14 @@ function EnrollmentForm({ onSuccess }) {
                     setFile(null);
                     document.getElementById('document').value = ''; 
                   }}
-                  className="p-2 text-rose-500 hover:bg-rose-100 rounded-lg transition-colors shrink-0"
+                  className="p-2 text-rose-500 hover:bg-rose-50 rounded-lg transition-colors shrink-0"
                 >
                   <X className="w-5 h-5" />
                 </button>
               </div>
             ) : (
               <label htmlFor="document" className="cursor-pointer flex flex-col items-center justify-center w-full h-full absolute inset-0">
-                <Upload className="w-8 h-8 text-indigo-600 mb-3 group-hover:scale-110 transition-transform" />
+                <Upload className="w-8 h-8 text-slate-400 mb-3" />
                 <span className="text-slate-800 font-bold text-sm mb-1">Joindre la fiche d'inscription</span>
                 <span className="text-slate-400 font-medium text-xs">PDF, JPG ou PNG (Max 5Mo)</span>
               </label>
@@ -388,16 +326,13 @@ function EnrollmentForm({ onSuccess }) {
         </motion.div>
       )}
 
-      <button type="submit" disabled={loading} className="w-full bg-indigo-600 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 hover:-translate-y-0.5 transition-all disabled:opacity-70 flex justify-center items-center">
-        {loading ? "Transmission sécurisée..." : "Valider l'inscription"}
+      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-8 rounded-xl shadow-lg shadow-slate-900/20 hover:bg-slate-800 hover:-translate-y-0.5 transition-all disabled:opacity-70 flex justify-center items-center mt-4">
+        {loading ? "Traitement..." : "Valider et passer au paiement"}
       </button>
     </motion.form>
   );
 }
 
-// ==========================================
-// ÉTAPE 2 : PAGE DE PAIEMENT SÉCURISÉ
-// ==========================================
 function PaymentCheckout({ data, onCancel }) {
   const [processing, setProcessing] = useState(false);
 
@@ -411,29 +346,27 @@ function PaymentCheckout({ data, onCancel }) {
   };
 
   return (
-    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6 w-full max-w-lg mx-auto">
+    <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6 w-full max-w-md mx-auto">
       <div className="text-center mb-8">
-        <div className="mx-auto w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4">
+        <div className="mx-auto w-16 h-16 bg-slate-50 text-slate-900 rounded-full flex items-center justify-center mb-4 border border-slate-100 shadow-sm">
           <ShieldCheck className="w-8 h-8" />
         </div>
         <h2 className="text-2xl font-black text-slate-900 mb-2">Paiement Sécurisé</h2>
-        <p className="text-slate-500 text-sm">Dossier enregistré. Étape 2 sur 2.</p>
+        <p className="text-slate-500 text-sm">Dossier enregistré.</p>
       </div>
 
-      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 mb-8 relative overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-500 to-emerald-500"></div>
-        
-        <div className="flex justify-between items-center border-b border-slate-200 pb-4 mb-4">
+      <div className="bg-white border border-slate-200 rounded-2xl p-6 mb-8 shadow-sm">
+        <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-4">
           <span className="text-slate-500 font-bold text-sm uppercase tracking-wide">Élève</span>
           <span className="text-slate-900 font-black">{data.nom}</span>
         </div>
-        <div className="flex justify-between items-center border-b border-slate-200 pb-4 mb-4">
+        <div className="flex justify-between items-center border-b border-slate-100 pb-4 mb-4">
           <span className="text-slate-500 font-bold text-sm uppercase tracking-wide">Matricule</span>
           <span className="text-slate-900 font-black">{data.matricule}</span>
         </div>
         <div className="flex justify-between items-center pt-2">
           <span className="text-slate-500 font-bold uppercase tracking-wide">Total à régler</span>
-          <span className="text-3xl font-black text-indigo-700">{data.montant.toLocaleString('fr-FR')} FCFA</span>
+          <span className="text-3xl font-black text-blue-600">{data.montant.toLocaleString('fr-FR')} FCFA</span>
         </div>
       </div>
 
@@ -441,39 +374,36 @@ function PaymentCheckout({ data, onCancel }) {
         <button 
           onClick={handlePayment} 
           disabled={processing}
-          className="w-full bg-slate-900 text-white font-bold text-lg py-5 px-8 rounded-xl shadow-xl shadow-slate-900/20 hover:bg-slate-800 transition-all disabled:opacity-70 flex items-center justify-center gap-3"
+          className="w-full bg-slate-900 text-white font-bold text-lg py-4 px-8 rounded-xl shadow-lg shadow-slate-900/20 hover:bg-slate-800 transition-all disabled:opacity-70 flex items-center justify-center gap-3"
         >
           {processing ? (
-            "Connexion sécurisée..."
+            "Connexion..."
           ) : (
             <>
-              <Smartphone className="w-6 h-6" />
-              Procéder au paiement
+              <Smartphone className="w-5 h-5" />
+              Payer par Mobile Money
             </>
           )}
         </button>
         <button 
           onClick={handlePayment} 
           disabled={processing}
-          className="w-full bg-white text-slate-700 border border-slate-200 font-bold text-lg py-5 px-8 rounded-xl hover:bg-slate-50 transition-all disabled:opacity-70 flex items-center justify-center gap-3"
+          className="w-full bg-white text-slate-700 border border-slate-200 font-bold text-lg py-4 px-8 rounded-xl hover:bg-slate-50 transition-all disabled:opacity-70 flex items-center justify-center gap-3"
         >
-          <CreditCard className="w-6 h-6 text-slate-400" />
+          <CreditCard className="w-5 h-5 text-slate-400" />
           Carte Bancaire
         </button>
       </div>
 
-      <div className="text-center pt-6">
-        <button onClick={onCancel} className="text-sm font-bold text-slate-400 hover:text-rose-600 transition-colors">
-          Annuler et modifier mon dossier
+      <div className="text-center pt-4">
+        <button onClick={onCancel} className="text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors">
+          Retour
         </button>
       </div>
     </motion.div>
   );
 }
 
-// ==========================================
-// COMPOSANT 2 : SUIVI DU DOSSIER
-// ==========================================
 function TrackingForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -496,36 +426,36 @@ function TrackingForm() {
 
   if (studentData) {
     return (
-      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6 max-w-2xl mx-auto">
+      <motion.div initial={{ opacity: 0, scale: 0.98 }} animate={{ opacity: 1, scale: 1 }} className="space-y-6">
         <div className="bg-slate-50 p-6 rounded-2xl text-center border border-slate-100">
           <h2 className="text-2xl font-black text-slate-900 mb-1">{studentData.nom}</h2>
-          <p className="text-slate-500 font-bold text-sm">Matricule : {studentData.matricule} • Niveau : {studentData.formation}</p>
+          <p className="text-slate-500 font-bold text-sm">Matricule : {studentData.matricule} • {studentData.formation}</p>
         </div>
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-white p-6 rounded-2xl text-center border border-slate-200 shadow-sm">
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Décision Académique</span>
-            <span className={`text-xl font-black ${studentData.statut === 'PAID' ? 'text-emerald-600' : 'text-amber-500'}`}>
-              {studentData.statut === 'PAID' ? 'Validé & Payé' : 'En Attente'}
+            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Statut</span>
+            <span className={`text-lg font-black ${studentData.statut === 'PAID' ? 'text-emerald-600' : 'text-amber-500'}`}>
+              {studentData.statut === 'PAID' ? 'Validé' : 'En Attente'}
             </span>
           </div>
           <div className="bg-white p-6 rounded-2xl text-center border border-slate-200 shadow-sm">
-            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Affectation Salle</span>
-            <span className="text-xl font-black text-slate-900">{studentData.classe}</span>
+            <span className="block text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">Classe</span>
+            <span className="text-lg font-black text-slate-900">{studentData.classe}</span>
           </div>
         </div>
         {studentData.statut === 'PAID' && (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
-            <a href={studentData.liens.recuPaiement} className="flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-800 font-bold py-4 px-6 rounded-xl hover:bg-slate-50 hover:border-indigo-300 transition-all">
-              <FileText className="w-5 h-5 text-indigo-600" /> Reçu de paiement
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+            <a href={studentData.liens.recuPaiement} className="flex items-center justify-center gap-3 bg-white border border-slate-200 text-slate-800 font-bold py-3.5 px-6 rounded-xl hover:bg-slate-50 transition-all">
+              <FileText className="w-5 h-5 text-slate-400" /> Reçu
             </a>
-            <a href={studentData.liens.emploiDuTemps} className="flex items-center justify-center gap-3 bg-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 transition-all">
-              <Calendar className="w-5 h-5" /> Emploi du temps
+            <a href={studentData.liens.emploiDuTemps} className="flex items-center justify-center gap-3 bg-slate-900 text-white font-bold py-3.5 px-6 rounded-xl hover:bg-slate-800 transition-all">
+              <Calendar className="w-5 h-5" /> Planning
             </a>
           </div>
         )}
-        <div className="text-center pt-6">
-          <button onClick={() => setStudentData(null)} className="text-sm font-bold text-slate-400 hover:text-indigo-600 transition-colors">
-            Fermer la session
+        <div className="text-center pt-4">
+          <button onClick={() => setStudentData(null)} className="text-sm font-bold text-slate-400 hover:text-slate-600 transition-colors">
+            Fermer
           </button>
         </div>
       </motion.div>
@@ -533,34 +463,31 @@ function TrackingForm() {
   }
 
   return (
-    <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handleTrack} className="space-y-6 max-w-md mx-auto">
-      <InputGroup label="Matricule de l'élève" name="matricule" placeholder="Identifiant unique" icon={<Search className="w-5 h-5 text-slate-400" />} />
-      <InputGroup label="Clé de sécurité (Téléphone)" name="phone" placeholder="Numéro utilisé à l'inscription" type="tel" />
+    <motion.form initial={{ opacity: 0 }} animate={{ opacity: 1 }} onSubmit={handleTrack} className="space-y-6">
+      <InputGroup label="Matricule de l'élève" name="matricule" placeholder="Ex: MAT123" icon={<Search className="w-5 h-5 text-slate-400" />} />
+      <InputGroup label="Clé de sécurité (Téléphone)" name="phone" placeholder="Numéro" type="tel" icon={<Phone className="w-5 h-5 text-slate-400"/>} />
       {error && (
-        <div className="p-4 rounded-xl flex items-center gap-3 text-sm font-bold bg-rose-50 text-rose-900">
+        <div className="p-4 rounded-xl flex items-center gap-3 text-sm font-bold bg-rose-50 text-rose-900 border border-rose-100">
            <AlertCircle className="w-5 h-5 shrink-0 text-rose-500" />
            {error}
         </div>
       )}
-      <button type="submit" disabled={loading} className="w-full bg-indigo-600 text-white font-bold py-4 px-6 rounded-xl hover:bg-indigo-700 shadow-lg shadow-indigo-600/20 transition-all duration-300 disabled:opacity-70 mt-2">
-        {loading ? "Recherche en cours..." : "Consulter mon dossier"}
+      <button type="submit" disabled={loading} className="w-full bg-slate-900 text-white font-bold py-4 px-6 rounded-xl hover:bg-slate-800 transition-all duration-300 disabled:opacity-70 mt-2">
+        {loading ? "Recherche..." : "Consulter mon dossier"}
       </button>
     </motion.form>
   );
 }
 
-// ==========================================
-// COMPOSANT UTILITAIRE : CHAMP DE TEXTE ÉPURÉ
-// ==========================================
 function InputGroup({ label, name, type = "text", placeholder, className = "", icon = null }) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
-      <label className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">{label}</label>
+      <label className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">{label}</label>
       <div className="relative">
         {icon && <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">{icon}</div>}
         <input 
           type={type} name={name} required placeholder={placeholder}
-          className={`w-full bg-slate-50 border-none rounded-xl py-3.5 text-slate-700 font-medium placeholder-slate-400 focus:ring-2 focus:ring-indigo-500 focus:bg-white transition-all outline-none ${icon ? 'pl-11 pr-4' : 'px-4'}`} 
+          className={`w-full bg-slate-50 border border-slate-200 rounded-xl py-3.5 text-slate-900 font-medium placeholder-slate-400 focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all outline-none ${icon ? 'pl-11 pr-4' : 'px-4'}`} 
         />
       </div>
     </div>
