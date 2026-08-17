@@ -127,7 +127,8 @@ export default function App() {
           <div className="flex flex-col lg:flex-row gap-16 items-center">
             <div className="w-full lg:w-1/2">
               <div className="aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl bg-slate-100 border-4 border-slate-50">
-                <img src="/hero-students.jpg" alt="L'Institution" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
+                {/* CORRECTION ICI : Changement de l'image pour montrer l'intérieur de l'école */}
+                <img src="/interior-students.jpg" alt="Intérieur de l'Institution" className="w-full h-full object-cover" onError={(e) => { e.target.onerror = null; e.target.src="/hero-students.jpg" }} />
               </div>
             </div>
             <div className="w-full lg:w-1/2">
