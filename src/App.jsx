@@ -57,15 +57,13 @@ export default function App() {
         </div>
       </nav>
 
-      {/* 2. HERO SECTION - Le Bleu Nuit massif pour casser la pâleur */}
+      {/* 2. HERO SECTION - Le Bleu Nuit massif */}
       <div className="relative pt-32 pb-16 lg:pt-40 lg:pb-28 overflow-hidden rounded-b-[3rem] shadow-2xl z-10 bg-gradient-to-br from-[#0B1536] via-[#122259] to-[#0B1536]">
-        {/* Motif de fond subtil */}
         <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white via-transparent to-transparent"></div>
         
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             
-            {/* Colonne Gauche : Texte en Blanc et Orange */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="max-w-xl">
               <div className="inline-flex items-center gap-3 mb-6 bg-white/10 px-4 py-2 rounded-full border border-white/20 backdrop-blur-sm">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
@@ -91,17 +89,13 @@ export default function App() {
               </div>
             </motion.div>
 
-            {/* Colonne Droite : Images Superposées (Bordures blanches éclatantes) */}
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative h-[350px] sm:h-[450px] lg:h-[500px] w-full mt-10 lg:mt-0">
-              {/* Image 1 : Mur extérieur */}
               <div className="absolute top-0 right-0 w-[80%] h-[75%] rounded-3xl overflow-hidden shadow-2xl bg-white border-4 border-white/10">
                 <img src="/hero-students.jpg" alt="Lycée Moderne de Bonoua" className="w-full h-full object-cover" onError={(e) => e.target.style.display = 'none'} />
               </div>
-              {/* Image 2 : Focus Intérieur */}
               <div className="absolute bottom-0 left-0 w-[60%] h-[60%] rounded-3xl border-8 border-white overflow-hidden shadow-2xl z-10 bg-slate-100">
                  <img src="/interior-students.jpg" alt="Intérieur Lycée" className="w-full h-full object-cover object-center" onError={(e) => { e.target.onerror = null; e.target.src="/hero-students.jpg" }} />
               </div>
-              {/* Badge validé */}
               <div className="absolute top-[60%] left-[5%] w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-xl z-20 border border-slate-100">
                 <div className="w-12 h-12 rounded-full border-2 border-emerald-100 flex items-center justify-center bg-emerald-50">
                   <CheckCircle className="w-6 h-6 text-emerald-500" />
@@ -113,7 +107,7 @@ export default function App() {
         </div>
       </div>
 
-      {/* 3. ACCÈS RAPIDES - Cartes interactives avec liseré orange */}
+      {/* 3. ACCÈS RAPIDES */}
       <div ref={featuresRef} className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard icon={<UserPlus className="w-7 h-7"/>} title="Inscription 2024" desc="Démarrez ou finalisez votre processus d'inscription administrative." linkText="Démarrer" onClick={() => scrollToForm('enroll')} />
@@ -185,7 +179,6 @@ export default function App() {
 
         {/* Le Conteneur du Formulaire */}
         <div className="bg-white rounded-[2rem] shadow-xl border border-slate-100 w-full p-8 md:p-14 relative overflow-hidden">
-          {/* Ligne orange de décoration en haut du formulaire */}
           <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-orange-400 to-amber-500"></div>
           
           <AnimatePresence mode="wait">
@@ -214,20 +207,24 @@ export default function App() {
         </div>
       </main>
 
-      {/* BANDEAU INSTITUTIONNEL UNIQUE (Ministère) */}
-      <div className="w-full bg-white py-10 mt-12 border-t border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 flex flex-col justify-center items-center gap-2 text-center text-slate-400 text-xs">
+      {/* 6. BANDEAU INSTITUTIONNEL (MINISTÈRE) - Ajouté ici, place parfaite ! */}
+      <div className="w-full bg-white py-8 border-t border-slate-200 shadow-inner">
+        <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-center gap-6">
           <img 
             src="/logo-ministere.png" 
-            alt="Ministère" 
-            className="h-20 object-contain grayscale opacity-60 hover:grayscale-0 hover:opacity-100 transition-all duration-300" 
+            alt="Ministère de l'Éducation Nationale" 
+            className="h-14 md:h-16 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-500 cursor-pointer" 
             onError={(e) => e.target.style.display = 'none'} 
           />
+          <div className="text-center sm:text-left border-t sm:border-t-0 sm:border-l border-slate-200 pt-4 sm:pt-0 sm:pl-6">
+            <p className="text-[11px] font-black text-slate-800 uppercase tracking-widest mb-1">République de Côte d'Ivoire</p>
+            <p className="text-[10px] font-bold text-slate-500 uppercase leading-snug">Ministère de l'Éducation Nationale <br className="hidden sm:block"/> et de l'Alphabétisation</p>
+          </div>
         </div>
       </div>
 
-      {/* 6. FOOTER */}
-      <footer id="contact" className="bg-[#0B1536] text-white pt-20 pb-10 border-t-[6px] border-orange-500 relative overflow-hidden">
+      {/* 7. FOOTER */}
+      <footer id="contact" className="bg-[#0B1536] text-white pt-16 pb-10 relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center relative z-10">
           
           <img src="/logo.png" alt="Logo" className="w-16 h-16 mb-6 brightness-0 invert opacity-90" onError={(e) => e.target.style.display = 'none'} />
@@ -250,7 +247,7 @@ export default function App() {
   );
 }
 
-// COMPOSANT: CARTES ACCÈS RAPIDE AVEC LISERÉ ORANGE SURVOL
+// COMPOSANT: CARTES ACCÈS RAPIDE
 function FeatureCard({ icon, title, desc, linkText, onClick }) {
   return (
     <div onClick={onClick} className="cursor-pointer bg-white rounded-3xl p-8 border border-slate-100 shadow-[0_4px_20px_rgb(0,0,0,0.03)] hover:shadow-2xl hover:-translate-y-2 hover:border-b-4 hover:border-b-orange-500 transition-all duration-300 flex flex-col items-start text-left group">
@@ -398,7 +395,6 @@ function EnrollmentForm({ onSuccess }) {
         </motion.div>
       )}
 
-      {/* Bouton d'action principal ORANGE */}
       <button type="submit" disabled={loading} className="w-full bg-orange-500 text-white font-black text-lg py-4 px-8 rounded-xl shadow-xl shadow-orange-500/30 hover:bg-orange-600 transition-all disabled:opacity-70 flex justify-center items-center mt-6">
         {loading ? "Traitement sécurisé en cours..." : "Valider et passer au paiement"}
       </button>
